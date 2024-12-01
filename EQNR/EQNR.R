@@ -15,7 +15,7 @@ oil_lag = lag(oil$Close_oil, n = 1)[-1]
 
 plot(c(0,650), c(250, 420))
 lines(time, close_true)
-regr1 = lm(close_true ~ time + close_lag + oil_lag)
+regr1 = lm(close_true ~ time + close_lag)
 
 summary(regr1)
 
@@ -40,7 +40,7 @@ regr4 = lm(close_true2 ~ time_lag + close_lag2 + pdiff_oil_lag)
 summary(regr4)
 
 ## Skrive til JSON
-lm_summary <- summary(regr4)
+lm_summary <- summary(regr1)
 
 coefficients <- as.data.frame(lm_summary$coefficients[, c("Estimate", "Std. Error")])
 
@@ -53,7 +53,7 @@ summary_list <- list(
 
 summary_json <- toJSON(summary_list, pretty = TRUE)
 
-write(summary_json, file = "./EQNR/EQNR_summary_Oil_drift.json")
+write(summary_json, file = "./EQNR/EQNR_summary_no_oil.json")
 
 
 cor(close_true, oil_true)
