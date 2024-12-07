@@ -19,14 +19,14 @@ summary(Y_hat_fro)
 
 mean(Y_t[2:n]/Y_lag[2:n])
 
-drift_fro = Y_t + 0.0009225*t - 0.9911782*Y_lag
+drift_aker = Y_t + 0.0009225*t - 0.9911782*Y_lag
 
-plot(t,drift_fro)
-regr_drift_fro = lm(drift_fro ~ t)
+plot(t,drift_aker)
+regr_drift_fro = lm(drift_aker ~ t)
 summary(regr_drift_fro)
 
 ## Skrive til JSON
-lm_summary <- summary(Y_hat_fro)
+lm_summary <- summary(Y_hat_aker)
 
 coefficients <- as.data.frame(lm_summary$coefficients[, c("Estimate", "Std. Error")])
 
@@ -39,6 +39,6 @@ summary_list <- list(
 
 summary_json <- toJSON(summary_list, pretty = TRUE)
 
-write(summary_json, file = "./AKER/FRO_est.json")
+write(summary_json, file = "./AKER/AKER_est.json")
 
 qnorm(0.75)
